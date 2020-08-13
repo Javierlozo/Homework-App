@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import SignUp from "./SignUp";
 import Modal from "@material-ui/core/Modal";
+import LogIn from "./LogIn";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,13 +43,20 @@ export default function NavBar() {
   const classes = useStyles();
 
   const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const [signin, setSignInOpen] = React.useState(false);
+  const [login, setLogInOpen] = React.useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const signUpOpen = () => {
+    setSignInOpen(true);
   };
+
+  const logInOpen = () => {
+    setLogInOpen(true);
+  };
+
   const handleClose = () => {
-    setOpen(false);
+    setSignInOpen(false);
+    setLogInOpen(false);
   };
 
   return (
@@ -56,18 +64,28 @@ export default function NavBar() {
       <AppBar className={classes.appbar} position="fixed">
         <Toolbar>
           <Typography variant="h6" className={classes.title}></Typography>
-          <Button color="inherit" onClick={handleOpen}>
+          <Button color="inherit" onClick={signUpOpen}>
             Sign Up
           </Button>
           <Modal
-            open={open}
+            open={signin}
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
             <SignUp />
           </Modal>
-          <Button color="inherit">Log In</Button>
+          <Button color="inherit" onClick={logInOpen}>
+            Log In
+          </Button>
+          <Modal
+            open={login}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            <LogIn />
+          </Modal>
         </Toolbar>
       </AppBar>
     </div>
