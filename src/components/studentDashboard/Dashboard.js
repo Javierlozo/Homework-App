@@ -20,7 +20,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
-import Deposits from './Deposits';
+import ImageAvatar from './ImageAvatar';
 import Orders from './Orders';
 
 function Copyright() {
@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column'
   },
   fixedHeight: {
-    height: 240
+    height: 600
   }
 }));
 
@@ -155,7 +155,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            Student Dashboard
           </Typography>
           <IconButton color='inherit'>
             <Badge badgeContent={4} color='secondary'>
@@ -164,6 +164,7 @@ export default function Dashboard() {
           </IconButton>
         </Toolbar>
       </AppBar>
+
       <Drawer
         variant='permanent'
         classes={{
@@ -178,9 +179,8 @@ export default function Dashboard() {
         </div>
         <Divider />
         <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
       </Drawer>
+
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
@@ -190,13 +190,8 @@ export default function Dashboard() {
                 <Chart />
               </Paper>
             </Grid>
-            Recent Deposits
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            Recent Orders
+            <ImageAvatar />
+
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Orders />
