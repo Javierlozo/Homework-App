@@ -100,7 +100,7 @@ export default function Reviews() {
       </Table>
       <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
+          See more Reviews
         </Link>
       </div>
     </React.Fragment>

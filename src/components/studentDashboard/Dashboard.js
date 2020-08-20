@@ -76,7 +76,10 @@ const useStyles = makeStyles(theme => ({
     display: "none"
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    fontFamily: "Barlow Condensed",
+    fontSize: "50px",
+    color: "white"
   },
   drawerPaper: {
     position: "relative",

@@ -1,14 +1,14 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-const useStyles = makeStyles((theme) => ({
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
+const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: '1rem'
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "1rem"
   },
   small: {
     width: theme.spacing(3),
@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(7),
     height: theme.spacing(7)
+  },
+  title: {
+    fontFamily: "Barlow Condensed",
+    fontSize: "30px",
+    fontWeight: "bold"
   }
 }));
 
@@ -25,11 +30,11 @@ export default function ImageAvatar() {
   return (
     <div className={classes.root}>
       <Avatar
-        alt='Remy Sharp'
-        src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Emblem-person-blue.svg/1024px-Emblem-person-blue.svg.png'
+        alt="Remy Sharp"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Emblem-person-blue.svg/1024px-Emblem-person-blue.svg.png"
         className={classes.large}
       />
-      <Typography variant='h5' gutterBottom>
+      <Typography className={classes.title} variant="h5" gutterBottom>
         Person's Name
       </Typography>
     </div>

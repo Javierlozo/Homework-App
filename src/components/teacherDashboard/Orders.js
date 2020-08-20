@@ -63,6 +63,9 @@ function preventDefault(event) {
 const useStyles = makeStyles(theme => ({
   seeMore: {
     marginTop: theme.spacing(3)
+  },
+  transactions: {
+    color: "#71988F"
   }
 }));
 
@@ -70,7 +73,7 @@ export default function Orders() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Transactions</Title>
+      <Title className={classes.transactions}>Transactions</Title>
       <Table size="small">
         <TableHead>
           <TableRow>

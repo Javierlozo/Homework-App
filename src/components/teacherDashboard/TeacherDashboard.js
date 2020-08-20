@@ -55,6 +55,7 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar
   },
   appBar: {
+    background: "#71988F",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
@@ -76,7 +77,11 @@ const useStyles = makeStyles(theme => ({
     display: "none"
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    fontFamily: "Barlow Condensed",
+    fontWeight: "bold",
+    fontSize: "50px",
+    color: "white"
   },
   drawerPaper: {
     position: "relative",

@@ -99,8 +99,8 @@ export default function Reviews() {
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
+        <Link color="secondary" href="#" onClick={preventDefault}>
+          See more Reviews
         </Link>
       </div>
     </React.Fragment>
