@@ -119,7 +119,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Dashboard() {
+export default function TeacherDashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -157,7 +157,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Student Dashboard
+            Teacher Dashboard
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -197,10 +197,10 @@ export default function Dashboard() {
                 <Card className="bio-container">
                   <ImageAvatar />
                   <Typography variant="h6" gutterBottom>
-                    Student Bio
+                    Teacher Bio
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    This is the student bio
+                    This is the teacher bio
                   </Typography>
                 </Card>
               </Grid>

@@ -63,6 +63,31 @@ export default function Chart() {
           variant="outlined"
         />
         <TextField
+          className={classes.m1}
+          id="outlined-basic"
+          label="Subject"
+          variant="outlined"
+        />
+        <TextField
+          className={classes.m1}
+          id="outlined-basic"
+          label="Years of Experience"
+          variant="outlined"
+        />
+        <TextField
+          className={classes.m1}
+          id="outlined-basic"
+          label="In Person/Online"
+          variant="outlined"
+        />
+
+        <TextField
+          className={classes.m1}
+          id="outlined-basic"
+          label="Price"
+          variant="outlined"
+        />
+        <TextField
           id="date"
           label="Birthday"
           type="date"
