@@ -1,62 +1,62 @@
-import React from "react";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import Box from "@material-ui/core/Box";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
-import Chart from "./Chart";
-import ImageAvatar from "./ImageAvatar";
-import Orders from "./Orders";
-import Card from "@material-ui/core/Card";
-import Reviews from "./Reviews";
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Drawer from '@material-ui/core/Drawer';
+import Box from '@material-ui/core/Box';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import { mainListItems, secondaryListItems } from './listItems';
+import Chart from './Chart';
+import ImageAvatar from './ImageAvatar';
+import Orders from './Orders';
+import Card from '@material-ui/core/Card';
+import Reviews from './Reviews';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+    <Typography variant='body2' color='textSecondary' align='center'>
+      {'Copyright © '}
+      <Link color='inherit' href='https://material-ui.com/'>
         Your Website
-      </Link>{" "}
+      </Link>{' '}
       {new Date().getFullYear()}
-      {"."}
+      {'.'}
     </Typography>
   );
 }
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: 'flex'
   },
   toolbar: {
     paddingRight: 24 // keep right padding when drawer closed
   },
   toolbarIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
     ...theme.mixins.toolbar
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
+    transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     })
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
+    transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     })
@@ -73,39 +73,39 @@ const useStyles = makeStyles(theme => ({
     marginRight: 36
   },
   menuButtonHidden: {
-    display: "none"
+    display: 'none'
   },
   title: {
     flexGrow: 1,
-    fontFamily: "Barlow Condensed",
-    fontSize: "50px",
-    color: "white"
+    fontFamily: 'Barlow Condensed',
+    fontSize: '50px',
+    color: 'white'
   },
   drawerPaper: {
-    position: "relative",
-    whiteSpace: "nowrap",
+    position: 'relative',
+    whiteSpace: 'nowrap',
     width: drawerWidth,
-    transition: theme.transitions.create("width", {
+    transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     })
   },
   drawerPaperClose: {
-    overflowX: "hidden",
-    transition: theme.transitions.create("width", {
+    overflowX: 'hidden',
+    transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
     width: theme.spacing(7),
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9)
     }
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: "100vh",
-    overflow: "auto"
+    height: '100vh',
+    overflow: 'auto'
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -113,12 +113,24 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column"
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column'
   },
   fixedHeight: {
     height: 600
+  },
+  avatarBioSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '12px'
+  },
+  bioSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '2rem'
   }
 }));
 
@@ -137,14 +149,14 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        position="absolute"
+        position='absolute'
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
           <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
+            edge='start'
+            color='inherit'
+            aria-label='open drawer'
             onClick={handleDrawerOpen}
             className={clsx(
               classes.menuButton,
@@ -154,16 +166,16 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
+            component='h1'
+            variant='h6'
+            color='inherit'
             noWrap
             className={classes.title}
           >
             Student Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+          <IconButton color='inherit'>
+            <Badge badgeContent={4} color='secondary'>
               <NotificationsIcon />
             </Badge>
           </IconButton>
@@ -171,7 +183,7 @@ export default function Dashboard() {
       </AppBar>
 
       <Drawer
-        variant="permanent"
+        variant='permanent'
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
         }}
@@ -188,35 +200,70 @@ export default function Dashboard() {
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={9}>
-            <Grid item xs={6} md={3} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            <Grid container item md={9} spacing={3}>
-              <Grid item xs={3} md={9}>
-                <Card className="bio-container">
-                  <ImageAvatar />
-                  <Typography variant="h6" gutterBottom>
-                    Student Bio
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    This is the student bio
-                  </Typography>
-                </Card>
+        <Container maxWidth='lg' className={classes.container}>
+          {/* Main container */}
+          <Grid
+            container
+            spacing={3}
+            direction='column'
+            justify='center'
+            alignItems='center'
+          >
+            {/* Top container */}
+            <Grid
+              container
+              item
+              spacing={3}
+              direction='row'
+              justify='center'
+              alignItems='flex-start'
+              lg={12}
+            >
+              {/* Left container */}
+              <Grid item xs={12} sm={4}>
+                <Paper className={fixedHeightPaper}>
+                  <Chart />
+                </Paper>
               </Grid>
-              <Grid item xs={3} md={9}>
-                <Reviews className="reviews"></Reviews>
+              {/* Right container */}
+              <Grid
+                container
+                item
+                spacing={3}
+                xs={12}
+                sm={8}
+                direction='column'
+                justify='center'
+                alignItems='center'
+              >
+                {/* Avatar & Bio section */}
+                <Grid item>
+                  <Card className={classes.avatarBioSection}>
+                    <ImageAvatar />
+                    <div className={classes.bioSection}>
+                      <Typography variant='h6' gutterBottom>
+                        Student Bio
+                      </Typography>
+                      <Typography variant='body1' gutterBottom>
+                        This is the student bio
+                      </Typography>
+                    </div>
+                  </Card>
+                </Grid>
+                {/* Review section */}
+                <Grid item>
+                  <Reviews className='reviews'></Reviews>
+                </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12}>
+            {/* Bottom container */}
+            <Grid item lg={12} style={{ width: '100%' }}>
               <Paper className={classes.paper}>
                 <Orders />
               </Paper>
             </Grid>
           </Grid>
+
           <Box pt={4}>
             <Copyright />
           </Box>
