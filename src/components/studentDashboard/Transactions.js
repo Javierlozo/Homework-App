@@ -7,7 +7,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
-import Rating from "@material-ui/lab/Rating";
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -67,20 +66,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Reviews() {
+export default function Transactions() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Reviews</Title>
+      <Title>Transactions</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>Review</TableCell>
-            <TableCell>Comments</TableCell>
-            <TableCell>From</TableCell>
-            <TableCell align="right">To</TableCell>
-            <TableCell>Rating</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Class</TableCell>
+            <TableCell>Payment Method</TableCell>
+            <TableCell align="right">Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -91,16 +89,13 @@ export default function Reviews() {
               <TableCell>{row.shipTo}</TableCell>
               <TableCell>{row.paymentMethod}</TableCell>
               <TableCell align="right">{row.amount}</TableCell>
-              <TableCell>
-                <Rating></Rating>
-              </TableCell>{" "}
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>
-          See more Reviews
+          See more orders
         </Link>
       </div>
     </React.Fragment>

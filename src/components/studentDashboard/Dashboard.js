@@ -21,7 +21,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
 import Chart from "./Chart";
 import ImageAvatar from "./ImageAvatar";
-import Orders from "./Orders";
+import Transactions from "./Transactions";
 import Card from "@material-ui/core/Card";
 import Reviews from "./Reviews";
 
@@ -259,7 +259,7 @@ export default function Dashboard() {
             {/* Bottom container */}
             <Grid item lg={12} style={{ width: "100%" }}>
               <Paper className={classes.paper}>
-                <Orders />
+                <Transactions />
               </Paper>
             </Grid>
           </Grid>
