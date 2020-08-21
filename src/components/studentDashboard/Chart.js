@@ -29,10 +29,15 @@ const useStyles = makeStyles(theme => ({
   m1: {
     margin: "1rem"
   },
-  title: {
+  info: {
     fontFamily: "Barlow Condensed",
     fontSize: "30px",
     fontWeight: "bold"
+  },
+  button: {
+    margin: "1rem",
+    backgroundColor: "#687ca1",
+    color: "white"
   }
 }));
 
@@ -48,7 +53,7 @@ export default function Chart() {
         <TextField
           className={classes.m1}
           id="outlined-basic"
-          label="FIrst Name"
+          label="First Name"
           variant="outlined"
         />
         <TextField
@@ -79,7 +84,7 @@ export default function Chart() {
             shrink: true
           }}
         />
-        <Button className={classes.m1} variant="contained" color="primary">
+        <Button className={classes.button} variant="contained">
           Update
         </Button>
       </form>

@@ -80,6 +80,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     fontFamily: "Barlow Condensed",
     fontSize: "50px",
+    fontWeight: "bold",
     color: "white"
   },
   drawerPaper: {

@@ -64,6 +64,17 @@ function preventDefault(event) {
 const useStyles = makeStyles(theme => ({
   seeMore: {
     marginTop: theme.spacing(3)
+  },
+  table: {
+    backgroundColor: "#687ca1",
+    textAlign: "center"
+  },
+
+  cell: {
+    fontFamily: "Barlow Condensed",
+    fontSize: "20px",
+    fontWeight: "bold",
+    textAlign: "center"
   }
 }));
 
@@ -71,16 +82,18 @@ export default function Reviews() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Reviews</Title>
+      <Title className={classes.title}>Reviews</Title>
       <Table size="small">
-        <TableHead>
+        <TableHead className={classes.table}>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Review</TableCell>
-            <TableCell>Comments</TableCell>
-            <TableCell>From</TableCell>
-            <TableCell align="right">To</TableCell>
-            <TableCell>Rating</TableCell>
+            <TableCell className={classes.cell}>Date</TableCell>
+            <TableCell className={classes.cell}>Review</TableCell>
+            <TableCell className={classes.cell}>Comments</TableCell>
+            <TableCell className={classes.cell}>From</TableCell>
+            <TableCell className={classes.cell} align="right">
+              To
+            </TableCell>
+            <TableCell className={classes.cell}>Rating</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

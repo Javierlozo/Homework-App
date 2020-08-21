@@ -27,6 +27,12 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center"
   },
   m1: { margin: "1rem" },
+
+  button: {
+    margin: "1rem",
+    backgroundColor: "#71988F",
+    color: "white"
+  },
   info: {
     fontFamily: "Barlow Condensed",
     fontWeight: "bold",
@@ -102,7 +108,7 @@ export default function Chart() {
             shrink: true
           }}
         />
-        <Button className={classes.m1} variant="contained" color="primary">
+        <Button className={classes.button} variant="contained">
           Update
         </Button>
       </form>
