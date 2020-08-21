@@ -1,8 +1,15 @@
+// import React from "react";
 // import { createMuiTheme } from "material-ui/core/styles";
 
-// export default createMuiTheme({
+// const theme = createMuiTheme({
 //   palette: {
-//     primary: "#71988F",
-//     secondary: "#E0E1E1"
+//     primary: {
+//       main: "#71988F"
+//     },
+//     secondary: {
+//       main: "#E0E1E1"
+//     }
 //   }
 // });
+
+// export default createMuiTheme;

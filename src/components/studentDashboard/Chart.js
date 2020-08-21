@@ -26,7 +26,14 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     alignItems: "center"
   },
-  m1: { margin: "1rem" }
+  m1: {
+    margin: "1rem"
+  },
+  title: {
+    fontFamily: "Barlow Condensed",
+    fontSize: "30px",
+    fontWeight: "bold"
+  }
 }));
 
 export default function Chart() {
@@ -34,7 +41,7 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography className={classes.info} variant="h6" gutterBottom>
         General Information
       </Typography>
       <form className={classes.container}>
