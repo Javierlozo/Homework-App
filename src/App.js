@@ -11,7 +11,6 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-
       <Router>
         <Home path="/"></Home>
         <StudentDashboard path="/studentdashboard" />
