@@ -90,6 +90,7 @@ export default function SignUp() {
                 autoComplete="lname"
               />
             </Grid>
+
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -116,7 +117,13 @@ export default function SignUp() {
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                label="Teacher"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label="Student"
               />
             </Grid>
           </Grid>

@@ -5,18 +5,19 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import { Link, Container } from "@material-ui/core";
+import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.common.black,
-    padding: theme.spacing(10, 0),
+    // backgroundColor: theme.palette.common.black,
+    padding: theme.spacing(5, 0),
     opacity: 0.5,
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.white,
   },
   facebook: {
     color: "#1877f2",
@@ -63,7 +64,7 @@ export default function TheFooter() {
             </Link>
           </Grid>
           <Grid item xs={12} sm={9}>
-            Footer Menu
+            About US
           </Grid>
         </Grid>
       </Container>
