@@ -16,7 +16,6 @@ function App() {
       // }}
     >
       <NavBar />
-
       <Router>
         <Home path="/"></Home>
         <StudentDashboard path="/studentdashboard" />
