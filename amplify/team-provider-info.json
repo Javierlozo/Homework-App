@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-homeworkapp-dev-153242-authRole",
+            "UnauthRoleArn": "arn:aws:iam::183853835623:role/amplify-homeworkapp-dev-153242-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::183853835623:role/amplify-homeworkapp-dev-153242-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-homeworkapp-dev-153242-deployment",
+            "UnauthRoleName": "amplify-homeworkapp-dev-153242-unauthRole",
+            "StackName": "amplify-homeworkapp-dev-153242",
+            "StackId": "arn:aws:cloudformation:us-east-1:183853835623:stack/amplify-homeworkapp-dev-153242/93e45d60-eaf7-11ea-b2d3-0e765a9edd1f",
+            "AmplifyAppId": "d3ff0c0nsnmwil"
+        },
+        "categories": {
+            "auth": {
+                "homeworkappe20eb7ee": {}
+            }
+        }
+    }
+}

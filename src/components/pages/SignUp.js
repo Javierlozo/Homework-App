@@ -1,32 +1,17 @@
 import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import SetUsername from "./SetUsername";
+import ConfirmSignUp from "./ConfirmSignUp";
+import { Auth } from "aws-amplify";
+import { navigate } from "@reach/router";
+import axios from "axios";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -37,117 +22,192 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 4, 3)
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 2)
   },
+  backButton: {
+    marginRight: theme.spacing(1)
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  }
 }));
 
+function getSteps() {
+  return ["Create Username and Password", "Confirm Sign Up"];
+}
+function getStepContent(stepIndex, signUpForm, setSignUpForm) {
+  switch (stepIndex) {
+    case 0:
+      return (
+        <SetUsername signUpForm={signUpForm} setSignUpForm={setSignUpForm} />
+      );
+    case 1:
+      return (
+        <ConfirmSignUp signUpForm={signUpForm} setSignUpForm={setSignUpForm} />
+      );
+    default:
+      return "Unknown stepIndex";
+  }
+}
 export default function SignUp() {
   const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
+  const [signUpForm, setSignUpForm] = React.useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    password: "",
+    role: "",
+    confirmationCode: ""
+  });
+  console.log(signUpForm);
 
+  const [signUpUser, setSignUpUser] = React.useState(undefined);
+  console.log("signed up user", signUpUser);
+
+  function renderButton() {
+    if (activeStep === steps.length - 1) {
+      return (
+        <Button variant="contained" color="primary" onClick={handleConfirmUser}>
+          Confirm
+        </Button>
+      );
+    } else {
+      return (
+        <Button variant="contained" color="primary" onClick={handleNext}>
+          Next
+        </Button>
+      );
+    }
+  }
+  const handleNext = () => {
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
+  };
+  const handleBack = () => {
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
+  };
+  const handleCreateUser = () => {
+    try {
+      async function signUp() {
+        const user = await Auth.signUp({
+          firstname: signUpForm.firstname,
+          lastname: signUpForm.lastname,
+          username: signUpForm.username,
+          password: signUpForm.password,
+          role: signUpForm.role,
+          attributes: {
+            email: signUpForm.username
+          }
+        });
+        setSignUpUser(user);
+      }
+      signUp();
+      handleNext();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  async function handleConfirmUser() {
+    async function uploadToSql() {
+      console.log("upload to mysql");
+      return await axios({
+        method: "post",
+        url: "https://localhost:4000/user",
+        data: {
+          firstname: signUpForm.firstname,
+          lastname: signUpForm.lastname,
+          username: signUpForm.username,
+          role: signUpForm.role
+        },
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    try {
+      const response = await Auth.confirmSignUp(
+        signUpForm.username,
+        signUpForm.confirmationCode
+      );
+      // prompt(response);
+      if (response === "SUCCESS") {
+        uploadToSql();
+        // return await axios({
+        //   method: "post",
+        //   url: "https://localhost:4000/user",
+        //   data: {
+        //     firstname: signUpForm.firstname,
+        //     lastname: signUpForm.lastname,
+        //     username: signUpForm.username,
+        //     role: signUpForm.role
+        //   }
+        // });
+        // const myUuid = uuid();
+        // Storage.put(
+        //   `${signUpForm.username}/profilepics/${myUuid}.png`,
+        //   signUpForm.profilePic,
+        //   {
+        //     contentType: "image/png"
+        //   }
+        // )
+        //   .then(result => console.log(result))
+        //   .then(() => {
+        //     uploadToSql(myUuid); // call the db
+        //   })
+        //   .then(() => navigate("/"))
+        //   .catch(err => console.log(err));
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="Teacher"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="Student"
-              />
-            </Grid>
-          </Grid>
+    <div className={classes.paper}>
+      <Stepper activeStep={activeStep} alternativeLabel>
+        {steps.map(label => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <div>
+        <div>
+          <Typography className={classes.instructions}>
+            {getStepContent(activeStep, signUpForm, setSignUpForm)}{" "}
+          </Typography>
           <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
+            disabled={activeStep === 0}
+            onClick={handleBack}
+            className={classes.backButton}
           >
-            Sign Up
+            Back
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
+          {activeStep === steps.length - 2 ? (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleCreateUser}
+            >
+              Create User
+            </Button>
+          ) : (
+            renderButton()
+          )}
+        </div>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
+    </div>
   );
 }
