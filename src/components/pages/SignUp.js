@@ -1,26 +1,26 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import SetUsername from "./SetUsername";
-import ConfirmSignUp from "./ConfirmSignUp";
-import { Auth } from "aws-amplify";
-import { navigate } from "@reach/router";
-import axios from "axios";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import SetUsername from './SetUsername';
+import ConfirmSignUp from './ConfirmSignUp';
+import { Auth } from 'aws-amplify';
+import { navigate } from '@reach/router';
+import axios from 'axios';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    position: "absolute",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'absolute',
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3)
   },
   submit: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ["Create Username and Password", "Confirm Sign Up"];
+  return ['Create Username and Password', 'Confirm Sign Up'];
 }
 function getStepContent(stepIndex, signUpForm, setSignUpForm) {
   switch (stepIndex) {
@@ -58,46 +58,46 @@ function getStepContent(stepIndex, signUpForm, setSignUpForm) {
         <ConfirmSignUp signUpForm={signUpForm} setSignUpForm={setSignUpForm} />
       );
     default:
-      return "Unknown stepIndex";
+      return 'Unknown stepIndex';
   }
 }
-export default function SignUp() {
+export default function SignUp({ handleCloseSignUp, logInOpen }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
   const [signUpForm, setSignUpForm] = React.useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    password: "",
-    role: "",
-    confirmationCode: ""
+    firstname: '',
+    lastname: '',
+    username: '',
+    password: '',
+    role: '',
+    confirmationCode: ''
   });
   console.log(signUpForm);
 
   const [signUpUser, setSignUpUser] = React.useState(undefined);
-  console.log("signed up user", signUpUser);
+  console.log('signed up user', signUpUser);
 
   function renderButton() {
     if (activeStep === steps.length - 1) {
       return (
-        <Button variant="contained" color="primary" onClick={handleConfirmUser}>
+        <Button variant='contained' color='primary' onClick={handleConfirmUser}>
           Confirm
         </Button>
       );
     } else {
       return (
-        <Button variant="contained" color="primary" onClick={handleNext}>
+        <Button variant='contained' color='primary' onClick={handleNext}>
           Next
         </Button>
       );
     }
   }
   const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
   const handleCreateUser = () => {
     try {
@@ -122,18 +122,18 @@ export default function SignUp() {
   };
 
   async function handleConfirmUser() {
-    async function uploadToSql() {
-      console.log("upload to mysql");
-      return await axios({
-        method: "post",
-        url: "https://localhost:4000/user",
+    function uploadToSql() {
+      console.log('upload to mysql');
+      return axios({
+        method: 'post',
+        url: 'http://localhost:4000/user',
         data: {
-          firstname: signUpForm.firstname,
-          lastname: signUpForm.lastname,
+          firstName: signUpForm.firstname,
+          lastName: signUpForm.lastname,
           username: signUpForm.username,
           role: signUpForm.role
         },
-        headers: { "Content-Type": "application/json" }
+        headers: { 'Content-Type': 'application/json' }
       });
     }
     try {
@@ -142,8 +142,13 @@ export default function SignUp() {
         signUpForm.confirmationCode
       );
       // prompt(response);
-      if (response === "SUCCESS") {
-        uploadToSql();
+      if (response === 'SUCCESS') {
+        uploadToSql()
+          .then(() => {
+            handleCloseSignUp();
+            logInOpen();
+          })
+          .catch((error) => console.log(error));
         // return await axios({
         //   method: "post",
         //   url: "https://localhost:4000/user",
@@ -168,7 +173,8 @@ export default function SignUp() {
         //   })
         //   .then(() => navigate("/"))
         //   .catch(err => console.log(err));
-        navigate("/");
+        // navigate('http://localhost:3000');
+        // window.location = 'http://localhost:3000';
       }
     } catch (error) {
       console.log(error);
@@ -177,7 +183,7 @@ export default function SignUp() {
   return (
     <div className={classes.paper}>
       <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map(label => (
+        {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
@@ -186,7 +192,7 @@ export default function SignUp() {
       <div>
         <div>
           <Typography className={classes.instructions}>
-            {getStepContent(activeStep, signUpForm, setSignUpForm)}{" "}
+            {getStepContent(activeStep, signUpForm, setSignUpForm)}{' '}
           </Typography>
           <Button
             disabled={activeStep === 0}
@@ -197,8 +203,8 @@ export default function SignUp() {
           </Button>
           {activeStep === steps.length - 2 ? (
             <Button
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               onClick={handleCreateUser}
             >
               Create User
